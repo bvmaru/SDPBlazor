@@ -1,0 +1,31 @@
+﻿<h3>MoneyConverter</h3>
+
+<label for="dolars" class="form-label">Dolars</label>
+<input type="number" class="form-control" id="dolar" placeholder="Dolars..." @bind="Dolars" @bind:event="oninput" />
+
+<label for="ratioFactor" class="form-label">Ratio</label>
+<input type="number" class="form-control" id="ratio" placeholder="@RatioFactor" @bind="RatioFactor" @bind:event="oninput" />
+
+@if (_plns != null)
+{
+    <div class="mt-4">
+        <span>@Dolars dolars is equal to @_plns PLN.</span>
+    </div>
+}
+@code {
+    double? _plns = null;
+    double? _dolars = null;
+
+    [Parameter]
+    public double RatioFactor { get; set; }
+
+    double? Dolars
+    {
+        get => _dolars;
+        set
+        {
+            _dolars = value;
+            _plns = value * RatioFactor;
+        }
+    }
+}

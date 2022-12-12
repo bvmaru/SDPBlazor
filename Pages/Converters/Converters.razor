@@ -18,6 +18,9 @@
         case 2:
             <DistanceConverter DistanceFactor="0.0254"></DistanceConverter>
             break;
+        case 3:
+            <MoneyConverter RatioFactor="4.59"></MoneyConverter>
+            break;
         default:
             <span>Please select converter...</span>
             break;
@@ -41,7 +44,8 @@
         readonly List<ConverterItem> _avaliableConverters = new List<ConverterItem>()
         {
             new ConverterItem(1, "Time converter"),
-            new ConverterItem(2, "Distance converter")
+            new ConverterItem(2, "Distance converter"),
+            new ConverterItem(3, "Currency converter")
         };
         int _selectedConverterId;
 }
