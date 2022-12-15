@@ -1,0 +1,51 @@
+﻿@page "/cipher"
+<h3>CaesarCipher</h3>
+
+<label for="key" class="form-label">Key (maximum value = 26)</label>
+<input type="number" class="form-control" id="key" placeholder="@key" @bind="key" @bind:event="oninput" />
+
+<div class="row vh-100">
+    <div class=" col-6">
+        <textarea class="form-control h-75" @bind=_word @bind:event="oninput"></textarea>
+    </div>
+    <div class="col-6 h-100">
+        @(Coder(_word))
+    </div>
+</div>
+
+@code {
+    char[] letters = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+    string _word = string.Empty;
+    int key = 1;
+
+    string Coder(string word)
+    {
+        string coded_word = "";
+        for (int normal = 0; normal < word.Length; normal++)
+        {
+            if (word[normal] == ' ')
+            {
+                coded_word += word[normal];
+                continue;
+            }
+
+            for (int check = 0; check < letters.Length; check++)
+            {
+                if (word[normal] == letters[check])
+                {
+                    if ((check + key + 1) > letters.Length)
+                    {
+                        coded_word += letters[(check - letters.Length) + key];
+                    }
+                    else
+                    {
+                        coded_word += letters[check + key];
+                    }
+                    break;
+                }
+            }
+        }
+        return coded_word;
+    }
+
+}
